@@ -2,6 +2,8 @@ theory IsaCyPhyCircus
   imports "IsaCircus.IsaCircus" "Framed_ODEs.Framed_ODEs"
 begin
 
+unbundle Circus_Syntax
+
 definition Dyn_SysC :: "('a::real_normed_vector \<Longrightarrow> 's) \<Rightarrow> ('s \<Rightarrow> 's) \<Rightarrow> ('s \<Rightarrow> bool) \<Rightarrow> ('s, 'e) sfrd hrel" where
 "Dyn_SysC x \<sigma> G = \<^bold>R\<^sub>s(true\<^sub>r \<turnstile> false \<diamondop> [\<lambda> (s, s'). s' \<in> g_orbital_on x (\<lambda> t. \<sigma>) G (\<lambda> t. UNIV) UNIV 0 s]\<^sub>S)"
 
@@ -26,6 +28,6 @@ syntax
 translations
   "_ode \<sigma> G" => "CONST dyn_sys (_smaplets_svids \<sigma>) (_Subst \<sigma>) (G)\<^sub>e"
 
-term "{x` = 1 | True}"
+term "{x` = 1 | True} ;; a \<rightarrow> P"
 
 end
